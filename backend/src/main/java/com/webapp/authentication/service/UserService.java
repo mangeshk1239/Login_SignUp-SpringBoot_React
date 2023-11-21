@@ -18,4 +18,8 @@ public class UserService {
     public Boolean exists(String userEmail) {
         return userRepository.exists(userEmail);
     }
+
+    public Boolean valid(String userPassword) {
+        return userRepository.valid(userPassword);
+    }
 }

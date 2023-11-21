@@ -32,4 +32,17 @@ public class UserController {
 
         return ResponseEntity.ok().body(Map.of("success", true, "message", "Registered Successfully"));
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<Object> loginUser(@RequestBody UserEntity userData) {
+        
+        Boolean userExists = userService.exists(userData.getEmail());
+        if (userExists == false) return ResponseEntity.badRequest().body(Map.of("success", false, "message", "Invalid Login credentials, please try again."));
+
+        String hash = Hashing.sha256().hashString(userData.getPassword(), Charsets.UTF_8).toString();
+        Boolean passwordValid = userService.valid(hash);
+        if (passwordValid == false) return ResponseEntity.badRequest().body(Map.of("success", false, "message", "Invalid Login credentials, please try again."));
+
+        return ResponseEntity.ok().body(Map.of("success", true, "message", "Login Successfully"));
+    }
 }

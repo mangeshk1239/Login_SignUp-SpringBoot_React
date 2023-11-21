@@ -117,10 +117,6 @@ export default function LoginElement(): JSX.Element {
                 body: JSON.stringify(loginUserData)
             }).then(response => response.json());
 
-            if (response.success) {
-                navigate("/blogger/1");
-            }
-
             console.log("response", response);
         } catch (error) {
             console.log("ERROR", error);

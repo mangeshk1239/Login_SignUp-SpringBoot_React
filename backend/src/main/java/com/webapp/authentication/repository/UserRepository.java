@@ -45,4 +45,20 @@ public class UserRepository {
         }
     }
 
+    public Boolean valid(String userPassword) {
+        String sql = 
+        """
+            SELECT id
+            FROM users
+            WHERE password = ?        
+        """;
+
+        try {
+            Long userId = jdbcTemplate.queryForObject(sql, Long.class, userPassword);
+            return userId != null;            
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }
