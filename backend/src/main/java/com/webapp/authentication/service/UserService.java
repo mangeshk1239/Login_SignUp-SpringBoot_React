@@ -11,7 +11,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public void create(UserEntity userData) {
-        userRepository.create(userData);
+    public void create(UserEntity userData, String hash) {
+        userRepository.create(userData, hash);
     }
 }

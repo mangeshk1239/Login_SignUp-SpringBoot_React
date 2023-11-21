@@ -12,7 +12,7 @@ public class UserRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public void create(UserEntity userData) {
+    public void create(UserEntity userData, String hash) {
         String sql = 
         """
             INSERT INTO users
@@ -25,7 +25,7 @@ public class UserRepository {
             userData.getFirstName(),
             userData.getLastName(),
             userData.getEmail(),
-            userData.getPassword()
+            hash
         );
     }
 

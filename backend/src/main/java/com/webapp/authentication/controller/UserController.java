@@ -1,6 +1,9 @@
 package com.webapp.authentication.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,13 +23,10 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/create")
-    public void createUser(@RequestBody UserEntity userData) {
-        String password = userData.getPassword();
-        System.out.println(password);
-        String hash = Hashing.sha256().hashString(password, Charsets.UTF_8).toString();
-        System.out.println(hash);
+    public ResponseEntity<Object> createUser(@RequestBody UserEntity userData) {
 
-        
-        // userService.create(userData);
+        // String hash = Hashing.sha256().hashString(userData.getPassword(), Charsets.UTF_8).toString();
+        // userService.create(userData, hash);
+        // return ResponseEntity.ok().body(Map.of("success", true, "message", "Registered Successfully"));
     }
 }
