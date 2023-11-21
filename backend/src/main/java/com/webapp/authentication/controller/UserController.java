@@ -14,6 +14,10 @@ import com.google.common.hash.Hashing;
 import com.webapp.authentication.model.UserEntity;
 import com.webapp.authentication.service.UserService;
 
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
 @Controller
 @RequestMapping("/api/user")
 public class UserController {
@@ -45,4 +49,13 @@ public class UserController {
 
         return ResponseEntity.ok().body(Map.of("success", true, "message", "Login Successfully"));
     }
+
+    @GetMapping("/get")
+    public ResponseEntity<Object> getUser(@CookieValue(value="token", required=false) String accessToken) {
+        if (accessToken == null) return ResponseEntity.badRequest().body(Map.of("success", false, "message", "You are Unauthorized to access this page."));
+        
+        System.out.println(accessToken);
+        return ResponseEntity.ok().body(Map.of("success", true, "message", "SUCCESS"));
+    }
+    
 }
