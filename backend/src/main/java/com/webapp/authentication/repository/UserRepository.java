@@ -29,4 +29,20 @@ public class UserRepository {
         );
     }
 
+    public Boolean exists(String userEmail) {
+        String sql = 
+        """
+            SELECT id 
+            FROM users
+            WHERE email = ?
+        """;
+
+        try {
+            Long userId = jdbcTemplate.queryForObject(sql, Long.class, userEmail);
+            return userId != null;            
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }

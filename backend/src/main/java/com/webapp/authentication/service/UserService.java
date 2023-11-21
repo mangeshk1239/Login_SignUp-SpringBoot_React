@@ -14,4 +14,8 @@ public class UserService {
     public void create(UserEntity userData, String hash) {
         userRepository.create(userData, hash);
     }
+
+    public Boolean exists(String userEmail) {
+        return userRepository.exists(userEmail);
+    }
 }
