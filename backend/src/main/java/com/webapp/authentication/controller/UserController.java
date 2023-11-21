@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.common.base.Charsets;
+import com.google.common.hash.Hashing;
 import com.webapp.authentication.model.UserEntity;
 import com.webapp.authentication.service.UserService;
 
@@ -21,6 +23,9 @@ public class UserController {
     public void createUser(@RequestBody UserEntity userData) {
         String password = userData.getPassword();
         System.out.println(password);
+        String hash = Hashing.sha256().hashString(password, Charsets.UTF_8).toString();
+        System.out.println(hash);
+
         
         // userService.create(userData);
     }
