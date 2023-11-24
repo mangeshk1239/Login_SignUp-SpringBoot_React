@@ -6,6 +6,7 @@ export default function App(): JSX.Element {
   return (
     <Router.BrowserRouter>
       <Router.Routes>
+        <Router.Route path="/" element={<Router.Navigate to="/login" />} />
         <Router.Route path="/register" element={<Page.Register />} />
         <Router.Route path="/login" element={<Page.Login />} />
         <Router.Route
@@ -14,7 +15,9 @@ export default function App(): JSX.Element {
             <Component.Authenticated>
               <Page.Home />
             </Component.Authenticated>
-          } />
+          }
+        />
+        <Router.Route path="*" element={<Component.PageNotFound />} />
       </Router.Routes>
     </Router.BrowserRouter>
   )

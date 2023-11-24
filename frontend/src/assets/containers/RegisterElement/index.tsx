@@ -3,10 +3,14 @@ import * as MUI from '@mui/material';
 import * as Component from "../../components/components";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { IRegisterUser } from './interfaces';
+import { Navigate } from "react-router-dom";
 
 const defaultTheme = MUI.createTheme();
 
 export default function RegisterElement(): JSX.Element {
+    if (getCookie("token") != undefined) {
+        return <Navigate to="/dashboard" />
+    }
 
     return (
         <MUI.ThemeProvider theme={defaultTheme}>
@@ -137,10 +141,16 @@ export default function RegisterElement(): JSX.Element {
                 },
                 body: JSON.stringify(registerUserData)
             }).then(response => response.json());
-            
+
             console.log("response", response);
         } catch (error) {
             console.log("ERROR", error);
         }
+    }
+
+    function getCookie(name: string): string | undefined {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
     }
 }
